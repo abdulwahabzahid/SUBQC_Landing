@@ -508,11 +508,11 @@ body {
 * Footer
 */
 #footer {
-		background: #333333;
+		background: #4CBC9A;
 }
 
 #footer a:not(.btn):not(.no-footer-css), #footer li, #footer span, #footer p {
-		color: #888888;
+		color: white;
 }
 
 .custom-list-style-1 > li {
@@ -522,7 +522,7 @@ body {
 }
 
 .custom-list-style-1 > li + li {
-		border-top: 1px solid #46474a;
+		border-top: 1px solid white;
 }
 
 .custom-list-style-1 > li:first-child {

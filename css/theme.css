@@ -8142,7 +8142,7 @@ html[xmlns] .clearfix {
 }
 
 .text-grey, .text-color-grey {
-	color: var(--grey) !important;
+	color: white;
 }
 
 .text-hover-grey:hover, .text-color-hover-grey:hover {
@@ -13058,7 +13058,7 @@ html body .rounded-circle {
 }
 
 #footer .footer-copyright p {
-	color: #555;
+	color: white;
 	margin: 0;
 	padding: 0;
 	font-size: 0.9em;
