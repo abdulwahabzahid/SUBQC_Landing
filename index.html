@@ -50,6 +50,52 @@
 	<!-- Theme Custom CSS -->
 	<link rel="stylesheet" href="css/custom.css">
 
+
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+			const navbarLinks = document.querySelectorAll('.header-nav-main ul.nav li a');
+			let prevActiveLink = null;
+	
+			window.addEventListener('scroll', () => {
+				const currentScroll = window.pageYOffset;
+				let currentSection = null;
+	
+				// Find the section currently in view
+				navbarLinks.forEach((link) => {
+					const sectionId = link.getAttribute('href').replace('#', '');
+					const section = document.getElementById(sectionId);
+	
+					if (section.offsetTop <= currentScroll + window.innerHeight * 0.5) {
+						currentSection = sectionId;
+					}
+				});
+	
+				// Add "active" class to the current navbar link
+				navbarLinks.forEach((link) => {
+					const sectionId = link.getAttribute('href').replace('#', '');
+	
+					if (sectionId === currentSection) {
+						link.classList.add('active');
+					} else {
+						link.classList.remove('active');
+					}
+				});
+	
+				// Remove "active" class from the previous navbar link
+				if (prevActiveLink && prevActiveLink !== currentSection) {
+					const prevActiveLinkElement = document.querySelector(`.header-nav-main ul.nav li a[href="#${prevActiveLink}"]`);
+					if (prevActiveLinkElement) {
+						prevActiveLinkElement.classList.remove('active');
+					}
+				}
+	
+				prevActiveLink = currentSection;
+			});
+		});
+	</script>
+	
+	
+
 </head>
 
 <body>
@@ -126,24 +172,11 @@
 										class="header-nav-main header-nav-main-arrows header-nav-main-dropdown-no-borders header-nav-main-effect-3 header-nav-main-sub-effect-1">
 										<nav class="collapse">
 											<ul class="nav nav-pills" id="mainNav">
-												<li><a href="#" class="nav-link active">Home</a></li>
-												<li><a href="#" class="nav-link">About</a></li>
-												<li class="dropdown">
-													<a href="#" class="nav-link dropdown-toggle">Services</a>
-													<ul class="dropdown-menu">
-														<li><a href="#" class="dropdown-item">Work Orders</a></li>
-														<li><a href="#" class="dropdown-item">Checklists</a></li>
-														<li><a href="#" class="dropdown-item">AQL Calculator</a></li>
-														<li><a href="#" class="dropdown-item">AI Assistant</a></li>
-														<li><a href="#" class="dropdown-item">Report Sharing</a></li>
-														<li><a href="#" class="dropdown-item">Team Management</a></li>
-													</ul>
-												</li>
-												<li><a href="#" class="nav-link">Products</a></li>
-												<li><a href="#" class="nav-link">Suppliers</a></li>
-												<li><a href="#" class="nav-link">Contact</a></li>
-												<!-- <li><a href="demo-auto-services-appointment.html" class="nav-link">Appointment</a></li> -->
-
+												<!-- <li><a href="#Home" class="nav-link">Home</a></li> -->
+												<li><a href="#Home" class="nav-link">About</a></li>
+												<li><a href="#Features" class="nav-link">Features</a></li>
+												<li><a href="#Services" class="nav-link">Services</a></li>
+												<li><a href="#FAQs" class="nav-link">FAQs</a></li>
 											</ul>
 										</nav>
 									</div>
@@ -226,7 +259,8 @@
 
 		<div role="main" class="main">
 
-			<section class="section custom-section-background position-relative border-0 overflow-hidden m-0 p-0">
+			<section id="Home"
+				class="section custom-section-background position-relative border-0 overflow-hidden m-0 p-0">
 				<div class="position-absolute top-0 left-0 right-0 bottom-0 animated fadeIn"
 					style="animation-delay: 600ms;">
 					<div class="background-image-wrapper custom-background-style-1 position-absolute top-0 left-0 right-0 bottom-0 animated kenBurnsToRight"
@@ -268,16 +302,16 @@
 				</div>
 			</section>
 
-			<section class="section border-0 m-0 appear-animation" data-appear-animation="fadeIn"
-				data-appear-animation-delay="1200">
+			<section id="About" class="section border-0 m-0 appear-animation" data-appear-animation="fadeIn"
+				data-appear-animation-delay="800">
 				<div class="container">
 					<div class="row align-items-center justify-content-center">
 						<div class="col-sm-9 col-md-12 col-lg-7 text-center text-lg-end mb-4 mb-lg-0">
 							<h2 class="font-weight-bold text-color-primary text-7 line-height-1 mb-1 appear-animation"
-								data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1700">Full
+								data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="800">Full
 								Spectrum Supply Chain Services and Solutions</h2>
 							<p class="font-weight-bold text-4 mb-0 appear-animation"
-								data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1900">
+								data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1000">
 								Experience Seamless Operations with Our Work Order Process</p>
 						</div>
 						<div class="col-lg-5 text-center text-lg-start ps-lg-4">
@@ -290,7 +324,7 @@
 				</div>
 			</section>
 
-			<div class="container my-5 pt-md-4 pt-xl-0">
+			<div id="Features" class="container my-5 pt-md-4 pt-xl-0">
 				<div class="row align-items-center justify-content-center pb-4 mb-5">
 					<div class="col-lg-6 pb-sm-4 pb-lg-0 mb-5 mb-lg-0">
 						<div class="overflow-hidden">
@@ -311,12 +345,12 @@
 							data-appear-animation-delay="700">From sourcing to distribution, our team is dedicated to
 							delivering results that exceed expectations. Our commitment to excellence drives us to
 							constantly innovate and adapt, ensuring your supply chain stays ahead of the curve.</p>
-						<div class="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+						<!-- <div class="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
 							<a href="#footer"
 								class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 px-5 btn-py-3 me-sm-2 mb-3 mb-sm-0 appear-animation"
 								data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="950">VIEW
 								MORE</a>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-10 col-md-9 col-lg-6 ps-lg-5 pe-5 appear-animation"
 						data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1450"
@@ -436,7 +470,7 @@
 									</ul>
 								</div>
 								<div class="col-6 col-lg-6 order-2 order-lg-3 appear-animation"
-									data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1250">
+									data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="750">
 									<ul class="list list-icons list-icons-style-2 list-icons-lg mb-0">
 										<li class="font-weight-semibold text-color-dark">
 											<i
@@ -461,186 +495,100 @@
 				</div>
 			</section>
 
-			<div class="container py-5 my-5">
-				<div class="row justify-content-center">
-					<div class="col-lg-9 col-xl-8 text-center">
-						<div class="overflow-hidden">
-							<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation"
-								data-appear-animation="maskUp" data-appear-animation-delay="250">SUBQC Services</h2>
+			<section id="Services">
+				<div class="container my-5 pt-md-5 pt-xl-0">
+					<div class="row align-items-center justify-content-center pb-4 mb-5">
+						<div class="col-lg-6 pb-sm-4 pb-lg-0 mb-5 mb-lg-0 pr-lg-5">
+							<div class="overflow-hidden">
+								<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation"
+									data-appear-animation="maskUp" data-appear-animation-delay="450">Streamlined
+									Checklists
+									& Work
+									Orders</h2>
+							</div>
+							<div class="custom-divider divider divider-primary divider-small my-3">
+								<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
+									data-appear-animation-delay="450">
+							</div>
+							<p class="font-weight-light text-3-5 mb-4 appear-animation"
+								data-appear-animation="fadeInUpShorter" data-appear-animation-delay="450">With a deep
+								understanding of every link in the chain, our experienced
+								team ensures meticulous attention to detail from sourcing to distribution.</p>
+							<p class="pb-1 mb-4 appear-animation" data-appear-animation="fadeInUpShorter"
+								data-appear-animation-delay="450">We're committed to delivering results that exceed
+								expectations, driving
+								constant innovation and adaptation to keep your supply chain ahead of the curve. Trust
+								SUBQC
+								for efficient
+								checklists and streamlined work orders that enhance your operational effectiveness.</p>
+							<!-- <div class="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+								<a href="#footer"
+									class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 px-5 btn-py-3 me-sm-2 mb-3 mb-sm-0 appear-animation"
+									data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="950">VIEW
+									MORE</a>
+							</div> -->
 						</div>
-						<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">
-							<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
-								data-appear-animation-delay="600">
+						<div class="col-lg-6 pb-sm-4 pb-lg-0 mb-5 mb-lg-0 pl-lg-5">
+							<div class="position-relative">
+								<div class="appear-animation" data-appear-animation="fadeInRightShorterPlus"
+									data-appear-animation-delay="450" data-plugin-options="{'accY': -200}">
+									<img src="img/demos/auto-services/services/product.jpg" class="img-fluid" alt=""
+										style="max-width: 90%; height: auto;" />
+								</div>
+							</div>
 						</div>
-						<p class="font-weight-light text-3-5 mb-5 appear-animation"
-							data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Our services are
-							designed to bolster your supply chain's quality assurance efforts. From meticulous
-							inspections to comprehensive audits, we offer a range of solutions tailored to meet your
-							specific needs.</p>
+					</div>
+					<div class="divider divider-primary divider-medium my-3">
+						<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
+							data-appear-animation-delay="450">
 					</div>
 				</div>
-				<div class="row row-gutter-sm mb-5 appear-animation" data-appear-animation="fadeInUpShorter"
-					data-appear-animation-delay="750">
-					<div class="col-sm-6 col-lg-3 text-center mb-4 mb-lg-0">
-						<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
-							class="text-decoration-none">
-							<div
-								class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
-								<div class="thumb-info-wrapper">
-									<img src="img/demos/auto-services/services/product.jpg" class="img-fluid" alt="">
-								</div>
-								<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Work Orders</h3>
-							</div>
-						</a>
-					</div>
-					<div class="col-sm-6 col-lg-3 text-center mb-4 mb-lg-0">
-						<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
-							class="text-decoration-none">
-							<div
-								class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
-								<div class="thumb-info-wrapper">
-									<img src="img/demos/auto-services/services/team.jpg" class="img-fluid" alt="">
-								</div>
-								<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Checklists</h3>
-							</div>
-						</a>
-					</div>
-					<div class="col-sm-6 col-lg-3 text-center mb-4 mb-sm-0">
-						<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
-							class="text-decoration-none">
-							<div
-								class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
-								<div class="thumb-info-wrapper">
-									<img src="img/demos/auto-services/services/product.jpg" class="img-fluid" alt="">
-								</div>
-								<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Product Management
-								</h3>
-							</div>
-						</a>
-					</div>
-					<div class="col-sm-6 col-lg-3 text-center">
-						<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
-							class="text-decoration-none">
-							<div
-								class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
-								<div class="thumb-info-wrapper">
-									<img src="img/demos/auto-services/services/team.jpg" class="img-fluid" alt="">
-								</div>
-								<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Team Management</h3>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col text-center">
-						<a href="#footer"
-							class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation"
-							data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="850">VIEW ALL
-							SERVICES</a>
-					</div>
-				</div>
-			</div>
 
-			<!-- <section class="section border-0 m-0">
-				<div class="container pb-3 my-5">
-					<div class="row justify-content-center pb-3 mb-4">
-						<div class="col text-center">
-							<h2 class="font-weight-bold text-color-dark line-height-1 mb-0">See What Clients Are Saying
-							</h2>
-							<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">
-								<hr class="my-0">
+				<div class="container my-5 pt-md-4 pt-xl-0">
+					<div class="row align-items-center justify-content-center pb-4 mb-5">
+						<div class="col-10 col-md-9 col-lg-6 ps-lg-5 pe-5 appear-animation"
+							data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="450"
+							data-plugin-options="{'accY': -200}">
+							<div class="position-relative">
+								<div class="appear-animation" data-appear-animation="fadeInRightShorterPlus"
+									data-appear-animation-delay="450">
+									<img src="img/demos/auto-services/services/team.jpg" class="img-fluid" alt=""
+										style="max-width: 90%; height: auto;" />
+								</div>
 							</div>
-							<p class="font-weight-bold text-3-5 mb-1">We are very proud of the service we provide and
-								stand by every product we carry.</p>
-							<p class="font-weight-light text-3-5 mb-0">Read our testimonials from our happy customers.
+						</div>
+
+						<div class="col-lg-6 pb-sm-4 pb-lg-0 mb-5 mb-lg-0">
+							<div class="overflow-hidden">
+								<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation"
+									data-appear-animation="maskUp" data-appear-animation-delay="450">Effective Team &
+									Product Management</h2>
+							</div>
+							<div class="custom-divider divider divider-primary divider-small my-3">
+								<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
+									data-appear-animation-delay="450">
+							</div>
+							<p class="font-weight-light text-3-5 mb-4 appear-animation"
+								data-appear-animation="fadeInUpShorter" data-appear-animation-delay="450">As pioneers in
+								optimizing workflows and enhancing product lifecycle management, our seasoned team
+								understands the intricate dynamics involved.</p>
+							<p class="pb-1 mb-4 appear-animation" data-appear-animation="fadeInUpShorter"
+								data-appear-animation-delay="450">From assembling high-performing teams to overseeing
+								product development and lifecycle, we are dedicated to delivering results that transcend
+								expectations. Our commitment to excellence propels us to innovate and
+								adapt, ensuring your teams and products stay ahead in today's dynamic market landscape..
 							</p>
+							<!-- <div class="d-flex align-items-start align-items-sm-center flex-column flex-sm-row">
+								<a href="#footer"
+									class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 px-5 btn-py-3 me-sm-2 mb-3 mb-sm-0 appear-animation"
+									data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="950">VIEW
+									MORE</a>
+							</div> -->
 						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<div class="owl-carousel nav-outside nav-style-1 nav-dark nav-arrows-thin nav-font-size-lg custom-carousel-box-shadow-1 mb-0"
-								data-plugin-options="{'responsive': {'0': {'items': 1}, '479': {'items': 1}, '768': {'items': 2}, '979': {'items': 2}, '1199': {'items': 3}}, 'autoplay': true, 'autoplayTimeout': 5000, 'autoplayHoverPause': true, 'dots': false, 'nav': true, 'loop': true, 'margin': 15, 'stagePadding': '75'}">
-								<div>
-									<div class="card custom-border-radius-1">
-										<div class="card-body">
-											<div
-												class="custom-testimonial-style-1 testimonial testimonial-style-2 testimonial-with-quotes testimonial-remove-right-quote text-center mb-0">
-												<blockquote>
-													<p class="text-color-dark text-3 font-weight-light px-0 mb-2">Lorem
-														ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
-														risus porta, tincidunt turpis at, interdum tortor. Suspendisse
-														potenti. Lorem ipsum dolor sit amet, consectetur adipiscing
-														elit.</p>
-												</blockquote>
-												<div class="testimonial-author">
-													<p><strong class="font-weight-extra-bold">John Smith</strong></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card custom-border-radius-1">
-										<div class="card-body">
-											<div
-												class="custom-testimonial-style-1 testimonial testimonial-style-2 testimonial-with-quotes testimonial-remove-right-quote text-center mb-0">
-												<blockquote>
-													<p class="text-color-dark text-3 font-weight-light px-0 mb-2">Lorem
-														ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
-														risus porta, tincidunt turpis at, interdum tortor. Suspendisse
-														potenti. Lorem ipsum dolor sit amet, consectetur adipiscing
-														elit.</p>
-												</blockquote>
-												<div class="testimonial-author">
-													<p><strong class="font-weight-extra-bold">John Doe</strong></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card custom-border-radius-1">
-										<div class="card-body">
-											<div
-												class="custom-testimonial-style-1 testimonial testimonial-style-2 testimonial-with-quotes testimonial-remove-right-quote text-center mb-0">
-												<blockquote>
-													<p class="text-color-dark text-3 font-weight-light px-0 mb-2">Lorem
-														ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
-														risus porta, tincidunt turpis at, interdum tortor. Suspendisse
-														potenti. Lorem ipsum dolor sit amet, consectetur adipiscing
-														elit.</p>
-												</blockquote>
-												<div class="testimonial-author">
-													<p><strong class="font-weight-extra-bold">John Smith</strong></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div>
-									<div class="card custom-border-radius-1">
-										<div class="card-body">
-											<div
-												class="custom-testimonial-style-1 testimonial testimonial-style-2 testimonial-with-quotes testimonial-remove-right-quote text-center mb-0">
-												<blockquote>
-													<p class="text-color-dark text-3 font-weight-light px-0 mb-2">Lorem
-														ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
-														risus porta, tincidunt turpis at, interdum tortor. Suspendisse
-														potenti. Lorem ipsum dolor sit amet, consectetur adipiscing
-														elit.</p>
-												</blockquote>
-												<div class="testimonial-author">
-													<p><strong class="font-weight-extra-bold">John Doe</strong></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
-			</section> -->
+			</section>
 
 			<section class="section section-height-3 bg-primary border-0 m-0">
 				<div class="container">
@@ -678,154 +626,170 @@
 				</div>
 			</section>
 
-			<div class="container py-5 my-5">
-				<div class="row justify-content-center pb-3 mb-4">
-					<div class="col-lg-9 col-xl-8 text-center">
-						<div class="overflow-hidden">
-							<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation"
-								data-appear-animation="maskUp" data-appear-animation-delay="250">Frequently Asked
-								Questions</h2>
+			<section id="FAQs">
+				<div class="container py-5 my-5">
+					<div class="row justify-content-center pb-3 mb-4">
+						<div class="col-lg-9 col-xl-8 text-center">
+							<div class="overflow-hidden">
+								<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation"
+									data-appear-animation="maskUp" data-appear-animation-delay="250">Frequently Asked
+									Questions</h2>
+							</div>
+							<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">
+								<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
+									data-appear-animation-delay="650">
+							</div>
+							<p class="font-weight-light text-3-5 mb-0 appear-animation"
+								data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Find answers
+								to
+								common queries about our services and processes in our FAQs section</p>
 						</div>
-						<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">
-							<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim"
-								data-appear-animation-delay="650">
-						</div>
-						<p class="font-weight-light text-3-5 mb-0 appear-animation"
-							data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Find answers to
-							common queries about our services and processes in our FAQs section</p>
 					</div>
-				</div>
-				<div class="row row-gutter-sm">
-					<div class="col-md-12 col-lg-12 mb-5 mb-md-0">
-						<svg class="custom-svg-2 overflow-visible" version="1.1" xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 185 151">
-							<g data-plugin-float-element
-								data-plugin-options="{'startPos': 'top', 'speed': 0.1, 'transition': true, 'transitionDuration': 2000, 'isInsideSVG': true}">
-								<path fill="#F4F4F4" class="appear-animation"
-									data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="850" d="M34.81,102.81L5.18,73.18c-2.13-2.13-2.13-5.59,0-7.72l29.63-29.63c2.13-2.13,5.59-2.13,7.72,0l29.63,29.63
+					<div class="row row-gutter-sm">
+						<div class="col-md-12 col-lg-12 mb-5 mb-md-0">
+							<svg class="custom-svg-2 overflow-visible" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 185 151">
+								<g data-plugin-float-element
+									data-plugin-options="{'startPos': 'top', 'speed': 0.1, 'transition': true, 'transitionDuration': 2000, 'isInsideSVG': true}">
+									<path fill="#F4F4F4" class="appear-animation"
+										data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="850"
+										d="M34.81,102.81L5.18,73.18c-2.13-2.13-2.13-5.59,0-7.72l29.63-29.63c2.13-2.13,5.59-2.13,7.72,0l29.63,29.63
 										c2.13,2.13,2.13,5.59,0,7.72l-29.63,29.63C40.4,104.94,36.94,104.94,34.81,102.81z" />
-							</g>
-							<g data-plugin-float-element
-								data-plugin-options="{'startPos': 'top', 'speed': 0.2, 'transition': true, 'transitionDuration': 2500, 'isInsideSVG': true}">
-								<path fill="#F4F4F4" class="appear-animation"
-									data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1000" d="M92.49,35.35L80.4,23.26c-1.75-1.75-1.75-4.59,0-6.34L92.49,4.83c1.75-1.75,4.59-1.75,6.34,0l12.09,12.09
+								</g>
+								<g data-plugin-float-element
+									data-plugin-options="{'startPos': 'top', 'speed': 0.2, 'transition': true, 'transitionDuration': 2500, 'isInsideSVG': true}">
+									<path fill="#F4F4F4" class="appear-animation"
+										data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1000"
+										d="M92.49,35.35L80.4,23.26c-1.75-1.75-1.75-4.59,0-6.34L92.49,4.83c1.75-1.75,4.59-1.75,6.34,0l12.09,12.09
 										c1.75,1.75,1.75,4.59,0,6.34L98.83,35.35C97.08,37.1,94.24,37.1,92.49,35.35z" />
-							</g>
-							<g data-plugin-float-element
-								data-plugin-options="{'startPos': 'top', 'speed': 0.3, 'transition': true, 'transitionDuration': 3000, 'isInsideSVG': true}">
-								<path fill="#F4F4F4" class="appear-animation"
-									data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1150" d="M129.88,148.41l-43.21-43.21c-2.13-2.13-2.13-5.59,0-7.72l43.21-43.21c2.13-2.13,5.59-2.13,7.72,0l43.21,43.21
+								</g>
+								<g data-plugin-float-element
+									data-plugin-options="{'startPos': 'top', 'speed': 0.3, 'transition': true, 'transitionDuration': 3000, 'isInsideSVG': true}">
+									<path fill="#F4F4F4" class="appear-animation"
+										data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1150"
+										d="M129.88,148.41l-43.21-43.21c-2.13-2.13-2.13-5.59,0-7.72l43.21-43.21c2.13-2.13,5.59-2.13,7.72,0l43.21,43.21
 										c2.13,2.13,2.13,5.59,0,7.72l-43.21,43.21C135.46,150.54,132.01,150.54,129.88,148.41z" />
-							</g>
-						</svg>
-						<div class="accordion custom-accordion-style-1 appear-animation"
-							data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750" id="accordion1">
-							<div class="card card-default">
-								<div class="card-header" id="collapse1HeadingOne">
-									<h4 class="card-title m-0">
-										<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
-											data-bs-toggle="collapse" data-bs-target="#collapse1One"
-											aria-expanded="false" aria-controls="collapse1One">
-											1 - Why Choose SUBQC?
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne"
-									data-bs-parent="#accordion1">
-									<div class="card-body">
-										<p class="mb-0">Choose SUBQC for your supply chain management needs because we
-											offer unparalleled precision in quality control, instilling confidence
-											through rigorous inspections and audits, streamlining operations to minimize
-											disruptions, providing tailor-made solutions to suit your specific
-											requirements, and leveraging the expertise of our dedicated team committed
-											to your success.</p>
+								</g>
+							</svg>
+							<div class="accordion custom-accordion-style-1 appear-animation"
+								data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750"
+								id="accordion1">
+								<div class="card card-default">
+									<div class="card-header" id="collapse1HeadingOne">
+										<h4 class="card-title m-0">
+											<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
+												data-bs-toggle="collapse" data-bs-target="#collapse1One"
+												aria-expanded="false" aria-controls="collapse1One">
+												1 - Why Choose SUBQC?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne"
+										data-bs-parent="#accordion1">
+										<div class="card-body">
+											<p class="mb-0">Choose SUBQC for your supply chain management needs because
+												we
+												offer unparalleled precision in quality control, instilling confidence
+												through rigorous inspections and audits, streamlining operations to
+												minimize
+												disruptions, providing tailor-made solutions to suit your specific
+												requirements, and leveraging the expertise of our dedicated team
+												committed
+												to your success.</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card card-default">
-								<div class="card-header" id="collapse1HeadingTwo">
-									<h4 class="card-title m-0">
-										<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
-											data-bs-toggle="collapse" data-bs-target="#collapse1Two"
-											aria-expanded="false" aria-controls="collapse1Two">
-											2 - What services are included in SUBQC?
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1Two" class="collapse" aria-labelledby="collapse1HeadingTwo"
-									data-bs-parent="#accordion1">
-									<div class="card-body">
-										<p class="mb-0">Catering to the diverse needs of modern supply chains, SUBQC
-											offers a comprehensive suite of services designed to optimize quality
-											control and assurance. Through SUBQC, you can create work orders,
-											checklists, manage suppliers and products and manage your team, our services
-											encompass every facet of supply chain management, ensuring efficiency,
-											reliability, and peace of mind.</p>
+								<div class="card card-default">
+									<div class="card-header" id="collapse1HeadingTwo">
+										<h4 class="card-title m-0">
+											<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
+												data-bs-toggle="collapse" data-bs-target="#collapse1Two"
+												aria-expanded="false" aria-controls="collapse1Two">
+												2 - What services are included in SUBQC?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1Two" class="collapse" aria-labelledby="collapse1HeadingTwo"
+										data-bs-parent="#accordion1">
+										<div class="card-body">
+											<p class="mb-0">Catering to the diverse needs of modern supply chains, SUBQC
+												offers a comprehensive suite of services designed to optimize quality
+												control and assurance. Through SUBQC, you can create work orders,
+												checklists, manage suppliers and products and manage your team, our
+												services
+												encompass every facet of supply chain management, ensuring efficiency,
+												reliability, and peace of mind.</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card card-default">
-								<div class="card-header" id="collapse1HeadingThree">
-									<h4 class="card-title m-0">
-										<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
-											data-bs-toggle="collapse" data-bs-target="#collapse1Three"
-											aria-expanded="false" aria-controls="collapse1Three">
-											3 - What AI applications are used in SubQC
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1Three" class="collapse" aria-labelledby="collapse1HeadingThree"
-									data-bs-parent="#accordion1">
-									<div class="card-body">
-										<p class="mb-0">At SubQC, we harness the power of artificial intelligence to
-											enhance our services. Our AI applications include an intelligent chatbot for
-											seamless communication and AI-generated checklists for efficient quality
-											control.</p>
+								<div class="card card-default">
+									<div class="card-header" id="collapse1HeadingThree">
+										<h4 class="card-title m-0">
+											<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
+												data-bs-toggle="collapse" data-bs-target="#collapse1Three"
+												aria-expanded="false" aria-controls="collapse1Three">
+												3 - What AI applications are used in SubQC
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1Three" class="collapse" aria-labelledby="collapse1HeadingThree"
+										data-bs-parent="#accordion1">
+										<div class="card-body">
+											<p class="mb-0">At SubQC, we harness the power of artificial intelligence to
+												enhance our services. Our AI applications include an intelligent chatbot
+												for
+												seamless communication and AI-generated checklists for efficient quality
+												control.</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card card-default">
-								<div class="card-header" id="collapse1HeadingFour">
-									<h4 class="card-title m-0">
-										<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
-											data-bs-toggle="collapse" data-bs-target="#collapse1Four"
-											aria-expanded="false" aria-controls="collapse1Four">
-											4 - What are the different user roles and permissions available on your
-											platform?
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1Four" class="collapse" aria-labelledby="collapse1HeadingFour"
-									data-bs-parent="#accordion1">
-									<div class="card-body">
-										<p class="mb-0">In SUBQC, we offer a range of roles tailored to meet the diverse
-											needs of our clients and ensure effective management of their supply chains.
-											These roles include administrative positions such as super admins as well as
-											user positions including company employee. </p>
+								<div class="card card-default">
+									<div class="card-header" id="collapse1HeadingFour">
+										<h4 class="card-title m-0">
+											<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
+												data-bs-toggle="collapse" data-bs-target="#collapse1Four"
+												aria-expanded="false" aria-controls="collapse1Four">
+												4 - What are the different user roles and permissions available on your
+												platform?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1Four" class="collapse" aria-labelledby="collapse1HeadingFour"
+										data-bs-parent="#accordion1">
+										<div class="card-body">
+											<p class="mb-0">In SUBQC, we offer a range of roles tailored to meet the
+												diverse
+												needs of our clients and ensure effective management of their supply
+												chains.
+												These roles include administrative positions such as super admins as
+												well as
+												user positions including company employee. </p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card card-default">
-								<div class="card-header" id="collapse1HeadingFive">
-									<h4 class="card-title m-0">
-										<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
-											data-bs-toggle="collapse" data-bs-target="#collapse1Five"
-											aria-expanded="false" aria-controls="collapse1Five">
-											5 - Can I customize the checklists and work orders to fit my specific needs?
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1Five" class="collapse" aria-labelledby="collapse1HeadingFive"
-									data-bs-parent="#accordion1">
-									<div class="card-body">
-										<p class="mb-0">Yes, in addition to our AI-generated checklist, you can also use
-											our manual checklist and work orders to fit your needs!</p>
+								<div class="card card-default">
+									<div class="card-header" id="collapse1HeadingFive">
+										<h4 class="card-title m-0">
+											<a class="accordion-toggle text-color-dark font-weight-bold collapsed"
+												data-bs-toggle="collapse" data-bs-target="#collapse1Five"
+												aria-expanded="false" aria-controls="collapse1Five">
+												5 - Can I customize the checklists and work orders to fit my specific
+												needs?
+											</a>
+										</h4>
+									</div>
+									<div id="collapse1Five" class="collapse" aria-labelledby="collapse1HeadingFive"
+										data-bs-parent="#accordion1">
+										<div class="card-body">
+											<p class="mb-0">Yes, in addition to our AI-generated checklist, you can also
+												use
+												our manual checklist and work orders to fit your needs!</p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- <div class="col-md-4 col-lg-3 text-center text-md-start">
+						<!-- <div class="col-md-4 col-lg-3 text-center text-md-start">
 							<div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1000">
 								<h3 class="font-weight-bold text-color-dark text-transform-none text-5-5 mb-3">Our Mission</h3>
 								<p class="pb-1 mb-2"> our mission is clear: to empower supply chains worldwide for sustainable success. We are dedicated to revolutionizing the industry through innovative solutions and unwavering commitment to excellence.</p>
@@ -834,8 +798,9 @@
 								<hr class="my-4">
 							</div>
 						</div> -->
+					</div>
 				</div>
-			</div>
+			</section>
 
 			<!-- <section class="shop section section-height-4 border-0 m-0">
 					<div class="container">
@@ -1034,7 +999,7 @@
 		<footer id="footer" class="border-0 mt-0">
 			<hr class="bg-light opacity-2 my-0">
 			<div class="container pb-0">
-				<div class="row text-center text-md-start py-2 my-4">
+				<div class="row text-center text-md-start pt-1 mt-5 mb-0">
 					<div
 						class="col-md-6 col-lg-4 align-self-center text-center text-md-start text-lg-center mb-5 mb-lg-0">
 						<a href="demo-auto-services.html" class="text-decoration-none">
@@ -1093,39 +1058,37 @@
 					<div class="col-lg-1 d-none d-lg-block"></div>
 
 					<div class="col-md-6 col-lg-3 mb-5 align-items-center justify-content-between">
-							<h5 class="text-transform-none font-weight-bold text-color-light text-4-5 mb-4">SUBQC
-								Services</h5>
-							<ul class="list list-unstyled mb-0">
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Work
-										Orders</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Checklists</a>
-								</li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">AQL
-										Calculator</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">AI
-										Assistant</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Report
-										Sharing</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Product
-										Management</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Suppliers
-										Management</a></li>
-								<li class="mb-0"><a
-										href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Team
-										Management</a></li>
-							</ul>
-						</div>
+						<h5 class="text-transform-none font-weight-bold text-color-light text-4-5 mb-4">SUBQC
+							Services</h5>
+						<ul class="list list-unstyled mb-0">
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Work
+									Orders</a></li>
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Checklists</a>
+							</li>
+							<li class="mb-0"><a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">AQL
+									Calculator</a></li>
+							<li class="mb-0"><a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">AI
+									Assistant</a></li>
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Report
+									Sharing</a></li>
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Product
+									Management</a></li>
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Suppliers
+									Management</a></li>
+							<li class="mb-0"><a
+									href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/">Team
+									Management</a></li>
+						</ul>
+					</div>
 				</div>
 
-				<div class="footer-copyright py-2" style="background-color: #4CBC9A; color: white;">
-					<div class="container py-4">
+				<div class="footer-copyright pb-3" style="background-color: #4CBC9A; color: white;">
+					<div class="container py-3">
 						<div class="row">
 							<div class="col">
 								<p class="text-center text-3 mb-0">SUBQC © 2024. All Rights Reserved.</p>
