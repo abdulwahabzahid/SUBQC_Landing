@@ -55,32 +55,52 @@
 		window.addEventListener('DOMContentLoaded', (event) => {
 			const navbarLinks = document.querySelectorAll('.header-nav-main ul.nav li a');
 			let prevActiveLink = null;
-	
+
+			// Function to calculate the height of the navbar
+			function getNavbarHeight() {
+				const navbar = document.querySelector('.header-nav-main');
+				return navbar.offsetHeight;
+			}
+
+			// Function to handle smooth scrolling to a target section
+			function scrollToSection(targetId) {
+				const targetSection = document.getElementById(targetId);
+				if (targetSection) {
+					const navbarHeight = getNavbarHeight();
+					const targetOffset = targetSection.offsetTop - navbarHeight;
+					window.scrollTo({
+						top: targetOffset,
+						behavior: 'smooth'
+					});
+				}
+			}
+
+			// Event listener for scroll
 			window.addEventListener('scroll', () => {
 				const currentScroll = window.pageYOffset;
 				let currentSection = null;
-	
+
 				// Find the section currently in view
 				navbarLinks.forEach((link) => {
 					const sectionId = link.getAttribute('href').replace('#', '');
 					const section = document.getElementById(sectionId);
-	
+
 					if (section.offsetTop <= currentScroll + window.innerHeight * 0.5) {
 						currentSection = sectionId;
 					}
 				});
-	
+
 				// Add "active" class to the current navbar link
 				navbarLinks.forEach((link) => {
 					const sectionId = link.getAttribute('href').replace('#', '');
-	
+
 					if (sectionId === currentSection) {
 						link.classList.add('active');
 					} else {
 						link.classList.remove('active');
 					}
 				});
-	
+
 				// Remove "active" class from the previous navbar link
 				if (prevActiveLink && prevActiveLink !== currentSection) {
 					const prevActiveLinkElement = document.querySelector(`.header-nav-main ul.nav li a[href="#${prevActiveLink}"]`);
@@ -88,13 +108,47 @@
 						prevActiveLinkElement.classList.remove('active');
 					}
 				}
-	
+
 				prevActiveLink = currentSection;
+			});
+
+			// Event listener for navbar link click
+			navbarLinks.forEach((link) => {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
+					const targetId = link.getAttribute('href').replace('#', '');
+					scrollToSection(targetId);
+				});
 			});
 		});
 	</script>
-	
-	
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const navbarHeight = document.querySelector('.navbar').offsetHeight;
+			const navbarLinks = document.querySelectorAll('.nav-link');
+
+			navbarLinks.forEach(function (link) {
+				link.addEventListener('click', function (event) {
+					event.preventDefault();
+
+					const targetId = this.getAttribute('href');
+					const targetSection = document.querySelector(targetId);
+
+					if (targetSection) {
+						const targetOffset = targetSection.offsetTop - navbarHeight;
+						window.scrollTo({
+							top: targetOffset,
+							behavior: 'smooth'
+						});
+					}
+				});
+			});
+		});
+	</script>
+
+
 
 </head>
 
@@ -315,7 +369,7 @@
 								Experience Seamless Operations with Our Work Order Process</p>
 						</div>
 						<div class="col-lg-5 text-center text-lg-start ps-lg-4">
-							<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
+							<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/workorder"
 								class="btn btn-primary btn-outline custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 ms-lg-2 appear-animation"
 								data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1500">CREATE
 								A WORK ORDER NOW</a>
@@ -604,7 +658,8 @@
 								Chain through SUBQC</p>
 						</div>
 						<div class="col-lg-6 col-xl-5">
-							<div class="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+							<div class="d-flex flex-column flex-lg-row align-items-center justify-content-center"
+								style="display: flex;">
 								<div class="feature-box align-items-center mb-3 mb-lg-0">
 									<div class="feature-box-icon bg-transparent">
 										<i class="icons icon-compass text-6 text-color-light"></i>
@@ -617,13 +672,9 @@
 												Expertise</a></strong>
 									</div>
 								</div>
-								<a href="http://subqc-env.eba-dvvxuvmg.ap-east-1.elasticbeanstalk.com/"
-									class="btn btn-light btn-outline custom-btn-border-radius font-weight-bold text-color-light text-color-hover-dark bg-color-hover-light btn-px-5 btn-py-3">Explore
-									Our Site</a>
 							</div>
+
 						</div>
-					</div>
-				</div>
 			</section>
 
 			<section id="FAQs">
